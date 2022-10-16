@@ -1,4 +1,4 @@
-package com.gis.rshu.map.repository.configuration;
+package com.gis.rshu.map.configuration;
 
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
 import org.springframework.boot.jdbc.DataSourceBuilder;

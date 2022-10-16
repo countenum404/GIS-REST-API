@@ -1,4 +1,6 @@
-package com.gis.rshu.map.entity;
+package com.gis.rshu.map.entity.address;
+
+import com.gis.rshu.map.entity.address.City;
 
 import javax.persistence.*;
 

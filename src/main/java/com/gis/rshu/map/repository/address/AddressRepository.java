@@ -1,6 +1,6 @@
 package com.gis.rshu.map.repository.address;
 
-import com.gis.rshu.map.entity.City;
+import com.gis.rshu.map.entity.address.City;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 

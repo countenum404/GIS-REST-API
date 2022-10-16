@@ -1,5 +1,7 @@
 package com.gis.rshu.map.entity.university;
 
+import org.hibernate.annotations.Cascade;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -8,8 +10,11 @@ public class University {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @Column(unique = true)
     private String name;
     @OneToMany(mappedBy = "university")
+    @Cascade(org.hibernate.annotations.CascadeType.ALL)
     private List<Building> buildings;
 
     public University() {

@@ -4,6 +4,7 @@ import com.gis.rshu.map.entity.address.City;
 import com.gis.rshu.map.entity.university.Building;
 import com.gis.rshu.map.entity.university.University;
 import com.gis.rshu.map.repository.university.BuildingRepository;
+import com.gis.rshu.map.repository.university.UniversityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class BuildingsController {
     @Autowired
     private BuildingRepository buildingRepository;
 
+    @Autowired
+    private UniversityRepository universityRepository;
+
     private List<String> buildings;
 
     @GetMapping
@@ -29,6 +33,15 @@ public class BuildingsController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public void addBuilding(@RequestBody Building building){
-        //if ()
+        if(universityRepository.findByName(building.getName()) == null){
+            University newUniversity = new University();
+            newUniversity.setName(building.getUniversity().getName());
+            universityRepository.save(newUniversity);
+            building.setUniversity(newUniversity);
+            buildingRepository.save(building);
+            return;
+        }
+        building.setUniversity(universityRepository.findByName(building.getUniversity().getName()));
+        buildingRepository.save(building);
     }
 }

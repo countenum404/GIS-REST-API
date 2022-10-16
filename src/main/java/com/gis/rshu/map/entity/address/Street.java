@@ -18,16 +18,6 @@ public class Street {
         this.city = city;
     }
 
-    @Override
-    public String toString() {
-        return "Street{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", house='" + house + '\'' +
-                ", city=" + city +
-                '}';
-    }
-
     @ManyToOne(fetch = FetchType.LAZY, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name="city_id", nullable = false)
     private City city;
@@ -58,5 +48,15 @@ public class Street {
 
     public void setHouse(String house) {
         this.house = house;
+    }
+
+    @Override
+    public String toString() {
+        return "Street{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", house='" + house + '\'' +
+                ", city=" + city +
+                '}';
     }
 }

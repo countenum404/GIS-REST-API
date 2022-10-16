@@ -33,7 +33,7 @@ public class BuildingsController {
 
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
     public void addBuilding(@RequestBody Building building){
-        if(universityRepository.findByName(building.getName()) == null){
+        if((universityRepository.findByName(building.getUniversity().getName())) == null){
             University newUniversity = new University();
             newUniversity.setName(building.getUniversity().getName());
             universityRepository.save(newUniversity);

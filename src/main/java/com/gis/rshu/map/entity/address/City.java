@@ -1,4 +1,4 @@
-package com.gis.rshu.map.entity;
+package com.gis.rshu.map.entity.address;
 
 import org.hibernate.annotations.Cascade;
 

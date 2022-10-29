@@ -7,10 +7,13 @@ import com.gis.rshu.map.repository.address.StreetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
+@RequestMapping("address")
 public class AddressController {
     @Autowired
     private AddressRepository cityRepository;
@@ -19,6 +22,10 @@ public class AddressController {
 
     private List<String> cities;
     private List<String> streets;
+
+    // address part
+
+    // streets part
 
     @GetMapping("street")
     public String getStreets(){
@@ -44,33 +51,20 @@ public class AddressController {
     }
 
     //Cities part
-    @GetMapping("address")
-    public String getAddress(){
+    @GetMapping("city")
+    public String getCity(){
         cities = cityRepository.findAll()
                 .stream()
                 .map(address -> new String(address.getCity()))
                 .collect(Collectors.toList());
         return cities.toString();
     }
-    @GetMapping("address/{id}")
-    public String getAddress(@PathVariable int id){
-        return cities.get(id);
-    }
+
     @PostMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    @RequestMapping("address")
-    public Boolean addAddress(@RequestBody City details){
+    @RequestMapping("city")
+    public Boolean addCity(@RequestBody City details){
         System.out.println(details.toString());
         cityRepository.save(details);
         return cities.add(details.getCity());
-    }
-    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
-    public void changeAddress(@RequestBody City details){
-        City detailsToModify = cityRepository.findById(details.getId()).get();
-        detailsToModify.setCity(details.getCity());
-        cityRepository.save(detailsToModify);
-    }
-    @DeleteMapping("address/{id}")
-    public void deleteAddress(@PathVariable Long id){
-        cityRepository.deleteById(id);
     }
 }

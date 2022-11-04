@@ -1,6 +1,5 @@
 package com.gis.rshu.map.controller;
 
-import com.gis.rshu.map.entity.address.City;
 import com.gis.rshu.map.entity.university.Building;
 import com.gis.rshu.map.entity.university.University;
 import com.gis.rshu.map.repository.university.BuildingRepository;
@@ -42,6 +41,19 @@ public class BuildingsController {
             return;
         }
         building.setUniversity(universityRepository.findByName(building.getUniversity().getName()));
+        buildingRepository.save(building);
+    }
+
+    @DeleteMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public void deleteBuilding(@RequestBody Building building){
+        Building toDelete = buildingRepository.findByName(building.getName());
+        buildingRepository.deleteById(toDelete.getId());
+    }
+
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public void changeBuilding(@RequestBody Building building){
+        Building buildingToChange = buildingRepository.findByName(building.getName());
+        buildingToChange = building;
         buildingRepository.save(building);
     }
 }

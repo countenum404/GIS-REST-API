@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @RestController
@@ -24,6 +25,14 @@ public class AddressController {
     private List<String> streets;
 
     // address part
+
+    @GetMapping
+    public String getAddresses(){
+        var addresses = streetRepository.findAll().stream()
+                .map(street -> street.getCity().getCity() + " " + street.getName() + " " + street.getHouse())
+                .collect(Collectors.toList());
+        return addresses.toString();
+    }
 
     // streets part
 

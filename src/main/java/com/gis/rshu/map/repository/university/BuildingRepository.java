@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface BuildingRepository extends CrudRepository<Building, Long> {
     List<Building> findAll();
+    Building findByName(String name);
 }

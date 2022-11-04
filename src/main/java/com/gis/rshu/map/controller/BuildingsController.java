@@ -49,4 +49,11 @@ public class BuildingsController {
         Building toDelete = buildingRepository.findByName(building.getName());
         buildingRepository.deleteById(toDelete.getId());
     }
+
+    @PutMapping(consumes = {MediaType.APPLICATION_JSON_VALUE})
+    public void changeBuilding(@RequestBody Building building){
+        Building buildingToChange = buildingRepository.findByName(building.getName());
+        buildingToChange = building;
+        buildingRepository.save(building);
+    }
 }

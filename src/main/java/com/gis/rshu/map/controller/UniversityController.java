@@ -24,6 +24,12 @@ public class UniversityController {
         return universityList.toString();
     }
 
+    @DeleteMapping
+    protected void deleteUniversity(@RequestBody University university){
+        University toDelete = repository.findByName(university.getName());
+        repository.delete(toDelete);
+    }
+
     @PostMapping
     public void addUniversity(@RequestBody University university){
         repository.save(university);

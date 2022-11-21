@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
@@ -13,15 +14,17 @@ import java.util.stream.Collectors;
 public class UniversityController {
     @Autowired
     private UniversityRepository repository;
-    private List<String> universityList;
+    private List<University> universityList;
 
     @GetMapping
-    public String getUniversity(){
-        universityList = repository.findAll()
-                .stream()
-                .map(university -> new String(university.getName()))
-                .collect(Collectors.toList());
-        return universityList.toString();
+    public List<University> getUniversity(){
+        universityList = repository.findAll();
+        return this.universityList;
+    }
+
+    @GetMapping("get")
+    public University getUniversityById(@RequestParam Long id){
+        return repository.findById(id).get();
     }
 
     @DeleteMapping
